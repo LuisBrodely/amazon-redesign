@@ -4,37 +4,32 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Register = () => {
-
   const [user, setUser] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  })
+    name: "",
+    email: "",
+    password: "",
+    last_name: "",
+    phone: '',
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
-  }
+    console.log(value, name)
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (user.password !== user.confirmPassword) {
-      alert("Las contraseñas no coinciden");
-      return;
-    }
-    const { confirmPassword, ...newUser } = user;
-    setUser(newUser);
-    console.log(newUser);
+    console.log(user);
   };
 
   return (
-    <section className="flex flex-col md:flex-row h-screen items-center">
+    <section className="flex flex-col md:flex-row items-center h-screen">
       <div
-        className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+        className=" bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
         flex items-center justify-center"
       >
-        <div className="w-full h-100">
+        <div className="w-full">
           <img
             src="https://www.serfadu.com/wp-content/uploads/2020/10/amazon.png"
             className="lg:w-[130px] w-[160px]"
@@ -46,20 +41,39 @@ const Register = () => {
 
           <form className="mt-6" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-gray-700" htmlFor="name">Nombre de usuario</label>
+              <label className="block text-gray-700" htmlFor="name">
+                Nombre
+              </label>
               <input
                 onChange={handleChange}
                 id="name"
                 type="text"
                 name="name"
-                placeholder="Ingresa tu nombre de usuario"
+                placeholder="Ingresa tu nombre"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 mt-2 border focus:border-yellow-amazon focus:bg-white focus:outline-none"
                 required
               />
             </div>
 
             <div className="mt-4">
-              <label className="block text-gray-700" htmlFor="email">Correo electronico</label>
+              <label className="block text-gray-700" htmlFor="last_name">
+                Apellido
+              </label>
+              <input
+                onChange={handleChange}
+                id="last_name"
+                type="text"
+                name="last_name"
+                placeholder="Ingresa tu nombre"
+                className="w-full px-4 py-3 rounded-lg bg-gray-100 mt-2 border focus:border-yellow-amazon focus:bg-white focus:outline-none"
+                required
+              />
+            </div>
+
+            <div className="mt-4">
+              <label className="block text-gray-700" htmlFor="email">
+                Correo electronico
+              </label>
               <input
                 onChange={handleChange}
                 type="email"
@@ -72,7 +86,9 @@ const Register = () => {
             </div>
 
             <div className="mt-4">
-              <label className="block text-gray-700" htmlFor="pass">Contraseña</label>
+              <label className="block text-gray-700" htmlFor="pass">
+                Contraseña
+              </label>
               <input
                 onChange={handleChange}
                 type="password"
@@ -86,15 +102,17 @@ const Register = () => {
             </div>
 
             <div className="mt-4">
-              <label className="block text-gray-700" htmlFor="passc">
-                Confirmar contraseña
+              <label className="block text-gray-700" htmlFor="phone">
+                Numero de telefono
               </label>
               <input
                 onChange={handleChange}
-                type="password"
-                id="passc"
-                name="confirmPassword"
-                placeholder="Ingresa de nuevo tu contraseña"
+                type="text"
+                id="phone"
+                minLength={10}
+                maxLength={10}
+                name="phone"
+                placeholder="Ingresa tu numero de telefono"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 mt-2 border focus:border-yellow-amazon
                 focus:bg-white focus:outline-none"
                 required
@@ -112,7 +130,7 @@ const Register = () => {
 
           <hr className="my-6 border-gray-300 w-full" />
 
-          <button
+          {/* <button
             type="button"
             className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300"
           >
@@ -124,7 +142,7 @@ const Register = () => {
               />
               <span className="ml-4">Iniciar Sesion con Google</span>
             </div>
-          </button>
+          </button> */}
 
           <p className="mt-8">
             ¿Ya tienes una cuenta?{" "}
@@ -141,7 +159,7 @@ const Register = () => {
         <img
           src={bgLogin}
           alt="Imagen random"
-          className="object-contain mt-4 mb-4"
+          className="object-contain mt-4 mb-4 w-[800px]"
         />
       </div>
     </section>

@@ -111,7 +111,7 @@ const Login = () => {
         <img
           src={bgLogin}
           alt="Imagen random"
-          className="object-contain mt-4 mb-4"
+          className="object-contain mt-4 mb-4 w-[800px]"
         />
       </div>
     </section>
