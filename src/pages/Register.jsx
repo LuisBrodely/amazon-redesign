@@ -24,9 +24,9 @@ const Register = () => {
   };
 
   return (
-    <section className="flex flex-col md:flex-row items-center h-screen">
+    <section className="flex flex-col md:flex-row items-center h-auto">
       <div
-        className=" bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+        className=" bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 px-6 lg:px-16 xl:px-12
         flex items-center justify-center"
       >
         <div className="w-full">
@@ -130,7 +130,7 @@ const Register = () => {
 
           <hr className="my-6 border-gray-300 w-full" />
 
-          {/* <button
+          <button
             type="button"
             className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300"
           >
@@ -142,9 +142,9 @@ const Register = () => {
               />
               <span className="ml-4">Iniciar Sesion con Google</span>
             </div>
-          </button> */}
+          </button>
 
-          <p className="mt-8">
+          <p className="mt-8 mb-20">
             ¿Ya tienes una cuenta?{" "}
             <Link
               to="/"
@@ -155,7 +155,7 @@ const Register = () => {
           </p>
         </div>
       </div>
-      <div className="bg-[#F8F8F8] hidden lg:flex lg:justify-end w-full md:w-1/2 xl:w-2/3 h-screen">
+      <div className="bg-[#F8F8F8] hidden lg:flex lg:justify-end w-full md:w-1/2 xl:w-2/3">
         <img
           src={bgLogin}
           alt="Imagen random"
