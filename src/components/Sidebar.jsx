@@ -23,17 +23,17 @@ const Sidebar = ({showMenu, setShowMenu}) => {
             </div>
 
             <div className="nav__items">
-              <a href="#" className="nav__link active">
+              <Link to='/index/' className="nav__link active">
                 <i className="bx bx-home nav__icon"></i>
                 <span className="nav__name">Inicio</span>
-              </a>
+              </Link>
             </div>
 
             <div className="nav__items">
-              <a href="#" className="nav__link">
+              <Link to='/index/cart' className="nav__link">
                 <i className="bx bx-shopping-bag nav__icon"></i>
                 <span className="nav__name">Bolsa</span>
-              </a>
+              </Link>
             </div>
 
             <div className="nav__items">
@@ -44,7 +44,7 @@ const Sidebar = ({showMenu, setShowMenu}) => {
             </div>
 
             <div className="nav__items">
-              <a href="#" className="nav__link">
+              <a href="https://github.com/LuisBrodely/amazon-redesign" className="nav__link" target='_blank'>
                 <i className="bx bxl-github nav__icon"></i>
                 <span className="nav__name">Repositorio</span>
               </a>

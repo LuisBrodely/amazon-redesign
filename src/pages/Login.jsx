@@ -57,7 +57,7 @@ const Login = () => {
               </a>
             </div>
 
-            <Link to='/home'>
+            <Link to='/index'>
               <button
                 type="submit"
                 className="w-full block bg-yellow-amazon hover:bg-yellow-secondary focus:bg-yellow-secondary text-white font-semibold rounded-lg
