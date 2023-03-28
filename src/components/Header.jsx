@@ -34,12 +34,12 @@ const Header = ({ showMenu, setShowMenu, search, setsearch }) => {
             <h6 className="text-yellow-amazon">Mexico</h6>
           </div>
         </div>
-
+        
         <div className="flex items-center text-2xl gap-4 lg:gap-8">
-          <i className="bx bx-cart"></i>
           <Link to='/index/cart'>
-            <i className="bx bx-user"></i>
+            <i className="bx bx-cart"></i>
           </Link>
+          <i className="bx bx-user"></i>
           {userSesion[0] && <div className="text-sm font-medium">
             <h5>{userSesion[0].name}</h5>
           </div>}
