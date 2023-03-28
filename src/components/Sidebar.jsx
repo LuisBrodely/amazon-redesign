@@ -37,10 +37,17 @@ const Sidebar = ({showMenu, setShowMenu}) => {
             </div>
 
             <div className="nav__items">
-              <a href="#" className="nav__link">
+              <Link to="/index/location" className="nav__link">
                 <i className="bx bx-map nav__icon"></i>
                 <span className="nav__name">Ubicacion</span>
-              </a>
+              </Link>
+            </div>
+
+            <div className="nav__items">
+              <Link to="/index/payment" className="nav__link">
+                <i className="bx bx-credit-card nav__icon"></i>
+                <span className="nav__name">Tarjeta</span>
+              </Link>
             </div>
 
             <div className="nav__items">

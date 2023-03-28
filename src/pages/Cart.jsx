@@ -14,7 +14,6 @@ const Cart = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
-    console.log(name, value);
   };
 
   const handleImageChange = (e) => {
