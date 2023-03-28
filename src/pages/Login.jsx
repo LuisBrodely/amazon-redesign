@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import bgLogin from '../assets/bg-login.svg'
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {Context} from "../Context.jsx";
 
 const Login = () => {
-
+  const {login} = useContext(Context)
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -18,6 +19,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(user)
+    login(user)
   };
 
   return (
