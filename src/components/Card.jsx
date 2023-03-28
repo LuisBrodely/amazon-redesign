@@ -1,6 +1,6 @@
 import React from "react";
 
-const Card = ({title, img, price}) => {
+const Card = ({ title, img, price }) => {
   return (
     <div>
       <div className="flex flex-col p-6 justify-between h-[335px] w-[265px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
