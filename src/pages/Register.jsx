@@ -1,8 +1,33 @@
 import React from "react";
-import bgLogin from '../assets/bg-login.svg'
+import bgLogin from "../assets/bg-login.svg";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Register = () => {
+
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (user.password !== user.confirmPassword) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+    const { confirmPassword, ...newUser } = user;
+    setUser(newUser);
+    console.log(newUser);
+  };
+
   return (
     <section className="flex flex-col md:flex-row h-screen items-center">
       <div
@@ -19,12 +44,14 @@ const Register = () => {
             Registrarte
           </h1>
 
-          <form className="mt-6" action="#" method="POST">
+          <form className="mt-6" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-gray-700">Nombre de usuario</label>
+              <label className="block text-gray-700" htmlFor="name">Nombre de usuario</label>
               <input
+                onChange={handleChange}
+                id="name"
                 type="text"
-                name=""
+                name="name"
                 placeholder="Ingresa tu nombre de usuario"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 mt-2 border focus:border-yellow-amazon focus:bg-white focus:outline-none"
                 required
@@ -32,10 +59,12 @@ const Register = () => {
             </div>
 
             <div className="mt-4">
-              <label className="block text-gray-700">Correo electronico</label>
+              <label className="block text-gray-700" htmlFor="email">Correo electronico</label>
               <input
+                onChange={handleChange}
                 type="email"
-                name=""
+                id="email"
+                name="email"
                 placeholder="Ingresa tu correo electronico"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 mt-2 border focus:border-yellow-amazon focus:bg-white focus:outline-none"
                 required
@@ -43,10 +72,12 @@ const Register = () => {
             </div>
 
             <div className="mt-4">
-              <label className="block text-gray-700">Contraseña</label>
+              <label className="block text-gray-700" htmlFor="pass">Contraseña</label>
               <input
+                onChange={handleChange}
                 type="password"
-                name=""
+                name="password"
+                id="pass"
                 placeholder="Ingresa tu contraseña"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 mt-2 border focus:border-yellow-amazon
                 focus:bg-white focus:outline-none"
@@ -55,10 +86,14 @@ const Register = () => {
             </div>
 
             <div className="mt-4">
-              <label className="block text-gray-700">Confirmar contraseña</label>
+              <label className="block text-gray-700" htmlFor="passc">
+                Confirmar contraseña
+              </label>
               <input
+                onChange={handleChange}
                 type="password"
-                name=""
+                id="passc"
+                name="confirmPassword"
                 placeholder="Ingresa de nuevo tu contraseña"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 mt-2 border focus:border-yellow-amazon
                 focus:bg-white focus:outline-none"

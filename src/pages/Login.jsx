@@ -1,12 +1,24 @@
 import React from "react";
 import bgLogin from '../assets/bg-login.svg'
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Login = () => {
 
-  const handleClick = () => {
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  })
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(user)
+  };
 
   return (
     <section className="flex flex-col md:flex-row h-screen items-center">
@@ -24,12 +36,13 @@ const Login = () => {
             Iniciar Sesion
           </h1>
 
-          <form className="mt-6" action="#" method="POST">
+          <form className="mt-6" onSubmit={handleSubmit}>
             <div>
               <label className="block text-gray-700">Correo electronico</label>
               <input
+                onChange={handleChange}
                 type="email"
-                name=""
+                name="email"
                 placeholder="Ingresa tu correo electronico"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 mt-2 border focus:border-yellow-amazon focus:bg-white focus:outline-none"
                 required
@@ -39,8 +52,9 @@ const Login = () => {
             <div className="mt-4">
               <label className="block text-gray-700">Contraseña</label>
               <input
+                onChange={handleChange}
                 type="password"
-                name=""
+                name="password"
                 placeholder="Ingresa tu contraseña"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 mt-2 border focus:border-yellow-amazon
                 focus:bg-white focus:outline-none"
@@ -57,15 +71,13 @@ const Login = () => {
               </a>
             </div>
 
-            <Link to='/index'>
-              <button
-                type="submit"
-                className="w-full block bg-yellow-amazon hover:bg-yellow-secondary focus:bg-yellow-secondary text-white font-semibold rounded-lg
-                px-4 py-3 mt-6"
-              >
-                Iniciar Sesion
-              </button>
-            </Link>
+            <button
+              type="submit"
+              className="w-full block bg-yellow-amazon hover:bg-yellow-secondary focus:bg-yellow-secondary text-white font-semibold rounded-lg
+              px-4 py-3 mt-6"
+            >
+              Iniciar Sesion
+            </button>
           </form>
 
           <hr className="my-6 border-gray-300 w-full" />

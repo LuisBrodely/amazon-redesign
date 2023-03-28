@@ -1,13 +1,43 @@
 import React from "react";
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import { PhotoIcon } from "@heroicons/react/24/solid";
+import { useState } from "react";
 
 const Cart = () => {
+  const [product, setProduct] = useState({
+    name: "",
+    price: 0,
+    description: "",
+    quantity: 0,
+    img: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProduct({ ...product, [name]: value });
+    console.log(name, value);
+  };
+
+  const handleImageChange = (e) => {
+    const imageFile = e.target.files[0];
+    const imageUrl = URL.createObjectURL(imageFile);
+    setProduct({ ...product, img: imageUrl });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(product);
+  };
+
   return (
     <section className="section">
-      <form className="p-8">
+      <form
+        className="p-8"
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+      >
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
+            <h2 className="text-lg font-semibold leading-7 text-gray-900">
               Crear Producto
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
@@ -24,6 +54,8 @@ const Cart = () => {
                 </label>
                 <div className="mt-2">
                   <input
+                    onChange={handleChange}
+                    required
                     type="text"
                     name="name"
                     id="name"
@@ -41,6 +73,8 @@ const Cart = () => {
                 </label>
                 <div className="mt-2">
                   <input
+                    onChange={handleChange}
+                    required
                     type="number"
                     name="price"
                     id="price"
@@ -52,15 +86,17 @@ const Cart = () => {
 
               <div className="col-span-full">
                 <label
-                  htmlFor="about"
+                  htmlFor="description"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Descripcion del Producto
                 </label>
                 <div className="mt-2">
                   <textarea
-                    id="about"
-                    name="about"
+                    onChange={handleChange}
+                    required
+                    id="description"
+                    name="description"
                     rows={3}
                     className="px-3 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:py-1.5 sm:text-sm sm:leading-6"
                     defaultValue={""}
@@ -78,6 +114,13 @@ const Cart = () => {
                 >
                   Subir foto
                 </label>
+                {product.img ? 
+                <img
+                  className=" w-full rounded-lg border-dashed border-gray-900/25"
+                  src={product.img}
+                  alt={product.name}
+                />
+                :
                 <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                   <div className="text-center">
                     <PhotoIcon
@@ -91,6 +134,8 @@ const Cart = () => {
                       >
                         <span>Upload a file</span>
                         <input
+                          onChange={handleImageChange}
+                          required
                           id="file-upload"
                           name="file-upload"
                           type="file"
@@ -104,22 +149,25 @@ const Cart = () => {
                     </p>
                   </div>
                 </div>
+                }
               </div>
 
               <div className="col-span-full">
                 <label
-                  htmlFor="street-address"
+                  htmlFor="quantity"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Street address
+                  Cantidad
                 </label>
                 <div className="mt-2">
                   <input
-                    type="text"
-                    name="street-address"
-                    id="street-address"
-                    autoComplete="street-address"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
+                    onChange={handleChange}
+                    required
+                    type="number"
+                    name="quantity"
+                    id="quantity"
+                    min={0}
+                    className="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
