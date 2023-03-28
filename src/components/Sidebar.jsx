@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
 import "../styles/sidebar.css";
 import { Link } from "react-router-dom";
+import {Context} from "../Context.jsx";
 
 const Sidebar = ({showMenu, setShowMenu}) => {
-
+  const {setUserSesion} = useContext(Context)
   return (
     <div className={`nav ${showMenu && 'show-menu w-[200px]'}`}>
       <nav className="nav__container">
@@ -59,7 +60,7 @@ const Sidebar = ({showMenu, setShowMenu}) => {
           </div>
         </div>
 
-        <Link to='/' className="nav__link nav__logout">
+        <Link to='/' onClick={() => setUserSesion("")} className="nav__link nav__logout">
           <i className="bx bx-log-out nav__icon"></i>
           <span className="nav__name">Log Out</span>
         </Link>

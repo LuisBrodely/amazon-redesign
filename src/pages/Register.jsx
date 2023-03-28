@@ -1,14 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 import bgLogin from "../assets/bg-login.svg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {Context} from "../Context.jsx";
 
 const Register = () => {
+  const {createUserPost} = useContext(Context)
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
-    last_name: "",
+    lastName: "",
     phone: '',
   });
 
@@ -21,6 +23,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(user);
+    createUserPost(user)
   };
 
   return (
@@ -63,7 +66,7 @@ const Register = () => {
                 onChange={handleChange}
                 id="last_name"
                 type="text"
-                name="last_name"
+                name="lastName"
                 placeholder="Ingresa tu nombre"
                 className="w-full px-4 py-3 rounded-lg bg-gray-100 mt-2 border focus:border-yellow-amazon focus:bg-white focus:outline-none"
                 required

@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
 import '../styles/header.css'
+import {Context} from "../Context.jsx";
 
 const Header = ({showMenu, setShowMenu, search, setsearch}) => {
-
+  const {userSesion} = useContext(Context)
+    console.log(userSesion)
   const handleChange = (e) =>{
     setsearch(e.target.value)
   }
@@ -35,6 +37,9 @@ const Header = ({showMenu, setShowMenu, search, setsearch}) => {
         <div className="flex items-center text-2xl gap-4 lg:gap-8">
           <i className="bx bx-cart"></i>
           <i className="bx bx-user"></i>
+            <div className="text-sm font-medium">
+                <h5>{userSesion[0].name}</h5>
+            </div>
         </div>
         
       </div>

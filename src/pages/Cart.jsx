@@ -1,14 +1,19 @@
-import React from "react";
+import React, {useContext} from "react";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
+import axios from "axios";
+import {Context} from "../Context.jsx";
 
 const Cart = () => {
+  const {addItem} = useContext(Context)
   const [product, setProduct] = useState({
     name: "",
     price: 0,
     description: "",
     quantity: 0,
     img: "",
+    cakePicture: "",
+    type: ""
   });
 
   const handleChange = (e) => {
@@ -19,12 +24,25 @@ const Cart = () => {
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
     const imageUrl = URL.createObjectURL(imageFile);
-    setProduct({ ...product, img: imageUrl });
+    setProduct({ ...product, cakePicture: imageUrl });
+    let formData = new FormData();
+    formData.append('file', event.target.files[0]);
+    console.log(...formData)
+    const k = [...formData]
+    console.log(k)
+    axios.post('http://localhost:8080/file', formData
+    ).then(function (response) {
+      console.log(response)
+      setProduct({...product, cakePicture: response.data.data});
+    }).catch(function (error) {
+      console.log(error);
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(product);
+    addItem(product);
   };
 
   return (
@@ -44,6 +62,7 @@ const Cart = () => {
             </p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
               <div className="sm:col-span-3">
                 <label
                   htmlFor="name"
@@ -106,6 +125,46 @@ const Cart = () => {
                 </p>
               </div>
 
+              <div className="sm:col-span-3">
+                <label
+                    htmlFor="quantity"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Cantidad
+                </label>
+                <div className="mt-2">
+                  <input
+                      onChange={handleChange}
+                      required
+                      type="number"
+                      min={0}
+                      name="quantity"
+                      id="quantity"
+                      className="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label
+                    htmlFor="type"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Tipo de producto
+                </label>
+                <div className="mt-2">
+                  <input
+                      onChange={handleChange}
+                      required
+                      type="text"
+                      name="type"
+                      id="type"
+                      min={0}
+                      className="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+
               <div className="col-span-full">
                 <label
                   htmlFor="cover-photo"
@@ -113,10 +172,10 @@ const Cart = () => {
                 >
                   Subir foto
                 </label>
-                {product.img ? 
+                {product.cakePicture ?
                 <img
                   className=" w-full rounded-lg border-dashed border-gray-900/25"
-                  src={product.img}
+                  src={product.cakePicture}
                   alt={product.name}
                 />
                 :
@@ -151,25 +210,6 @@ const Cart = () => {
                 }
               </div>
 
-              <div className="col-span-full">
-                <label
-                  htmlFor="quantity"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Cantidad
-                </label>
-                <div className="mt-2">
-                  <input
-                    onChange={handleChange}
-                    required
-                    type="number"
-                    name="quantity"
-                    id="quantity"
-                    min={0}
-                    className="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
             </div>
           </div>
         </div>
