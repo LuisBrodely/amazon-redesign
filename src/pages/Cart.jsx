@@ -1,16 +1,23 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import Cardcart from "../components/Cardcart";
 import {Context} from "../Context.jsx";
+import Successfully from "../components/Successfully.jsx";
+import {useNavigate} from "react-router-dom";
 
 const Cart = () => {
-  const { userSesion, cartItems, address, payment} = useContext(Context)
+  const navigate = useNavigate();
+  const { userSesion, cartItems, address, payment, setCartItems,show, setShow} = useContext(Context)
   console.log(address)
   console.log(payment)
-  const {state,city,street,houseNumber,zipCode,clienId} = address[0]
   const total = cartItems?.reduce(
       (previous, current) => previous + current.amount * current.price,
       0
   );
+  const submit = () => {
+    setCartItems([])
+    setShow(true)
+    navigate('/index')
+  }
   return (
     <section className="section">
       <div className='pt-10 pb-20'>
@@ -59,7 +66,6 @@ const Cart = () => {
                       </div>))
               }
             </div>
-
             <p className="font-bold mb-2 mt-6">Pago</p>
             <div className="mb-2 flex justify-between">
               <p className="text-gray-700">Subtotal</p>
@@ -77,7 +83,7 @@ const Cart = () => {
                 <p className="text-sm text-gray-700">Incluye IVA</p>
               </div>
             </div>
-            <button  className="mt-6 w-full rounded-md bg-yellow-amazon py-1.5 font-medium text-blue-50 hover:bg-yellow-secondary">
+            <button onClick={()=> submit()} className="mt-6 w-full rounded-md bg-yellow-amazon py-1.5 font-medium text-blue-50 hover:bg-yellow-secondary">
               Pagar
             </button>
           </div>

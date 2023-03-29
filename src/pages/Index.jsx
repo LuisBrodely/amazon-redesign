@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import { useState } from "react";
@@ -9,8 +9,11 @@ import { Route, Routes } from "react-router-dom";
 import Location from "./Location";
 import Payment  from "./Payment";
 import axios from "axios";
+import Successfully from "../components/Successfully.jsx";
+import {Context} from "../Context.jsx";
 
 const Index = () => {
+  const {show, setShow} = useContext(Context)
   const [showMenu, setShowMenu] = useState(false);
   const [search, setsearch] = useState("");
 
@@ -31,6 +34,7 @@ const Index = () => {
         <Route exact path="/payment" element={<Payment />} />
         <Route exact path="/cart" element={<Cart />} />
       </Routes>
+        <Successfully show={show} setShow={setShow}></Successfully>
     </main>
   );
 };

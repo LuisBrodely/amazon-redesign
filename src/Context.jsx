@@ -6,6 +6,7 @@ export const Context = createContext();
 
 export const ContextProvider = ({children}) => {
     const navigate = useNavigate();
+    const [show, setShow] = useState(false)
     const [address, setAddress] = useState([{}])
     //STATES FOR THE PAYMENTS
     const [payment,setPayment] = useState([{}])
@@ -268,6 +269,9 @@ export const ContextProvider = ({children}) => {
             addItemToCart,
             removeItemsToCart,
             cartItems,
+            show,
+            setShow,
+            setCartItems,
             delateAllFromCart,}}>
             {children}
         </Context.Provider>
