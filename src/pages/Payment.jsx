@@ -1,14 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 import { useState } from "react";
+import {Context} from "../Context.jsx";
 
 const Payment = () => {
-
+    const {addPayment, userSesion} = useContext(Context)
+    const {id ,name, lastName, phone, email} = userSesion[0]
 	const [card, setCard] = useState({
-    card_issuer: "Steve Jobs",
-    card_number: '0000000000000000',
-		card_expiry: "03/25",
-    card_holder: 'Citibanamex',
-		cvv: 0
+        cardIssuer: "Steve Jobs",
+        cardNumber: '0000000000000000',
+        dateExpiry: "03/25",
+        cardHolder: 'Citibanamex',
+		cvv: 0,
+        clientId: id
   });
 
 	const handleChange = (e) => {
@@ -29,6 +32,7 @@ const Payment = () => {
 	const handleSubmit = (e) => {
     e.preventDefault();
     console.log(card);
+    addPayment(card);
   };
 
   return (
@@ -45,21 +49,21 @@ const Payment = () => {
               <div className="flex justify-between">
                 <div className="">
                   <p className="font-light">Nombre</p>
-                  <p className="font-medium tracking-widest">{card.card_issuer}</p>
+                  <p className="font-medium tracking-widest">{card.cardIssuer}</p>
                 </div>
                 <img className="w-14 h-14" src="https://i.imgur.com/bbPHJVe.png" />
               </div>
               <div className="pt-1">
                 <p className="font-light">Numero de tarjeta</p>
                 <p className="font-medium tracking-more-wider">
-                  {addSpaces(card.card_number)}
+                  {addSpaces(card.cardNumber)}
                 </p>
               </div>
               <div className="pt-6 pr-6">
                 <div className="flex justify-between">
                   <div className="">
                     <p className="font-light text-xs ">Expiracion</p>
-                    <p className="font-medium tracking-wider text-sm">{card.card_expiry}</p>
+                    <p className="font-medium tracking-wider text-sm">{card.dateExpiry}</p>
                   </div>
 
                   <div className="">
@@ -90,7 +94,7 @@ const Payment = () => {
 
           <div className="sm:col-span-2">
             <label
-              htmlFor="card_issuer"
+              htmlFor="cardIssuer"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
               Nombre del propietario
@@ -99,9 +103,9 @@ const Payment = () => {
               <input
 								onChange={handleChange}
                 type="text"
-								placeholder={card.card_issuer}
-                name="card_issuer"
-                id="card_issuer	"
+								placeholder={card.cardIssuer}
+                name="cardIssuer"
+                id="cardIssuer	"
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
               />
             </div>
@@ -109,7 +113,7 @@ const Payment = () => {
 
 					<div className="sm:col-span-2">
             <label
-              htmlFor="card_number"
+              htmlFor="cardNumber"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
               Numero de tarjeta
@@ -119,9 +123,9 @@ const Payment = () => {
 								onChange={handleChange}
 								maxLength={16}
                 type="text"
-								placeholder={addSpaces(card.card_number)}
-                name="card_number"
-                id="card_number	"
+								placeholder={addSpaces(card.cardNumber)}
+                name="cardNumber"
+                id="cardNumber"
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
               />
             </div>
@@ -129,7 +133,7 @@ const Payment = () => {
 
 					<div>
             <label
-              htmlFor="card_holder"
+              htmlFor="cardHolder"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
               Banco
@@ -138,16 +142,16 @@ const Payment = () => {
               <input
 								onChange={handleChange}
                 type="text"
-                name="card_holder"
-                id="card_holder"
-								placeholder={card.card_holder}
+                name="cardHolder"
+                id="cardHolder"
+								placeholder={card.cardHolder}
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
               />
             </div>
           </div>
           <div>
             <label
-              htmlFor="card_expiry"
+              htmlFor="dateExpiry"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
               Fecha de expiración
@@ -156,10 +160,10 @@ const Payment = () => {
               <input
 								onChange={handleChange}
                 type="text"
-                name="card_expiry"
+                name="dateExpiry"
 								maxLength={5}
-								placeholder={card.card_expiry}
-                id="card_expiry"
+								placeholder={card.dateExpiry}
+                id="dateExpiry"
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
               />
             </div>

@@ -1,14 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 import { useState } from "react";
+import {Context} from "../Context.jsx";
 
 const Location = () => {
-
+  const {addAddress, userSesion} = useContext(Context)
+  const {id ,name, lastName, phone, email} = userSesion[0]
   const [adress, setAdress] = useState({
     state: "",
     city: '',
-		street: "",
-    house_number: '',
-		zip_code: ''
+    street: "",
+    houseNumber: '',
+    zipCode: '',
+    clientId: id
   });
 
   const handleChange = (e) => {
@@ -20,6 +23,7 @@ const Location = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(adress);
+    addAddress(adress)
   };
 
   return (
@@ -117,7 +121,7 @@ const Location = () => {
 
 					<div>
             <label
-              htmlFor="zip_code"
+              htmlFor="zipCode"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
               Codigo Postal
@@ -126,15 +130,15 @@ const Location = () => {
               <input
                 onChange={handleChange}
                 type="text"
-                name="zip_code"
-                id="zip_code	"
+                name="zipCode"
+                id="zipCode	"
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
               />
             </div>
           </div>
           <div>
             <label
-              htmlFor="house_number"
+              htmlFor="houseNumber"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
               Numero de casa
@@ -143,8 +147,8 @@ const Location = () => {
               <input
                 onChange={handleChange}
                 type="text"
-                name="house_number"
-                id="house_number"
+                name="houseNumber"
+                id="houseNumber"
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
               />
             </div>

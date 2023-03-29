@@ -1,6 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
+import {Context} from "../Context.jsx";
+import {Link} from "react-router-dom";
 
-const Card = ({ title, img, price }) => {
+const Card = ({ title, img, price, data}) => {
+  const {addItemToCart} = useContext(Context)
   return (
     <div>
       <div className="flex flex-col p-6 justify-between h-[335px] w-[265px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -21,12 +24,13 @@ const Card = ({ title, img, price }) => {
             <span className="text-2xl font-bold text-gray-900 dark:text-white">
               ${price}
             </span>
-            <a
+            <Link
               href="#"
               className="text-white bg-blue-amazon hover:bg-blue-secondary focus:outline-none focus:bg-blue-secondary font-medium rounded-lg text-sm px-4 py-2 text-center"
+              onClick={() => addItemToCart(data)}
             >
               Añadir al carrito
-            </a>
+            </Link>
           </div>
         </div>
       </div>

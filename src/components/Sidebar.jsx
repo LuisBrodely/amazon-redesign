@@ -11,7 +11,7 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
         <div>
           <div className="nav__list">
             <div className="nav__items" onClick={() => setShowMenu(!showMenu)}>
-              <a href="#" className="nav__link">
+              <Link href="#" className="nav__link">
                 <i className="bx bx-menu nav__icon text-2xl"></i>
                 <span className="nav__name">
                   <img
@@ -20,7 +20,7 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
                     className="w-[30px]"
                   />
                 </span>
-              </a>
+              </Link>
             </div>
 
             <div className="nav__items">

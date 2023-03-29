@@ -1,10 +1,18 @@
-import React, { useContext } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import '../styles/header.css'
 import { Context } from "../Context.jsx";
 import { Link } from "react-router-dom";
 
 const Header = ({ showMenu, setShowMenu, search, setsearch }) => {
-  const { userSesion } = useContext(Context)
+  const { userSesion, cartItems } = useContext(Context)
+  const [productsLength, setProductsLength] = useState(0)
+
+  useEffect(() => {
+    setProductsLength(
+        cartItems.reduce((previous, current) => previous + current.amount, 0)
+    );
+  }, [cartItems]);
+
   console.log(userSesion)
   const handleChange = (e) => {
     setsearch(e.target.value)
@@ -39,6 +47,9 @@ const Header = ({ showMenu, setShowMenu, search, setsearch }) => {
           <Link to='/index/cart'>
             <i className="bx bx-cart"></i>
           </Link>
+          <div className="text-sm font-medium">
+            <h5>{productsLength}</h5>
+          </div>
           <i className="bx bx-user"></i>
           {userSesion[0] && <div className="text-sm font-medium">
             <h5>{userSesion[0].name}</h5>

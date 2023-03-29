@@ -24,7 +24,7 @@ const Home = ({search}) => {
   return (
     <section className="section">
       <div className="bg-blue-amazon w-full">
-        <img src={bgHome} alt="product" />
+        <img className="w-full" src={bgHome} alt="product" />
       </div>
         {uniqueSections.map((type, index)=> (
             <div key={index}>
@@ -35,6 +35,7 @@ const Home = ({search}) => {
                 {item.map((product) => (
                     type === product.type &&
                         <Card
+                            data={product}
                             key={product.id}
                             title={product.title}
                             price={product.price}
@@ -45,7 +46,7 @@ const Home = ({search}) => {
 
         </div>))}
       <div className="bg-blue-amazon w-full">
-        <img src={publicity} alt="publicidad" />
+        <img className="w-full" src={publicity} alt="publicidad" />
       </div>
     </section>
   );
