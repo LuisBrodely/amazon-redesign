@@ -5,8 +5,6 @@ import Card from "../components/Card";
 import {Context} from "../Context.jsx";
 import axios from "axios";
 
-
-
 const Home = ({search}) => {
     const [item, setItems] = useState([]);
     const getProducts = async () => {
