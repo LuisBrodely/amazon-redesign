@@ -118,13 +118,13 @@ export const ContextProvider = ({ children }) => {
 	const addItem = async (product) => {
 		const { description, name, quantity, price, cakePicture, type } = product;
 
-		await axios.post("http://18.207.215.219:8080/product", { description, name, price, quantity, type, cakePicture });
+		await axios.post("https://18.207.215.219:8080/product", { description, name, price, quantity, type, cakePicture });
 		getProducts()
 			;
 	};
 	const getProducts = async () => {
 		await axios
-			.get("http://18.207.215.219:8080/product/list")
+			.get("https://18.207.215.219:8080/product/list")
 			.then(({ data }) => setItems(data.data));
 
 	};
@@ -135,12 +135,12 @@ export const ContextProvider = ({ children }) => {
 	const login = async (user) => {
 		const { email, password } = user
 		await axios
-			.post("http://18.207.215.219:8080/login", { email, password })
+			.post("https://18.207.215.219:8080/login", { email, password })
 			.then(async (response) => {
 				setToken(response.headers['authorization'])
 				await axios({
 					method: 'get',
-					url: `http://18.207.215.219:8080/client/findByEmail?email=${email}`,
+					url: `https://18.207.215.219:8080/client/findByEmail?email=${email}`,
 					headers: { 'Authorization': `${response.headers['authorization']}` }
 				}).then(function (response) {
 					console.log(response.data.data)
@@ -172,14 +172,14 @@ export const ContextProvider = ({ children }) => {
 	}, []);
 	const createUserPost = async (user) => {
 		const { email, lastName, name, password, phone } = user;
-		await axios.post("http://18.207.215.219:8080/client/register", {email, lastName, name, password, phone});
+		await axios.post("https://18.207.215.219:8080/client/register", {email, lastName, name, password, phone});
 		navigate("/")
 	}
 
 	const getPayment = async () => {
 		if (userSesion[0]) {
 			const { id } = userSesion[0]
-			await axios.get(`http://18.207.215.219:8080/payment/client/${id}`)
+			await axios.get(`https://18.207.215.219:8080/payment/client/${id}`)
 				.then(({ data }) => {
 					setPayment(data.data)
 					console.log(data)
@@ -191,7 +191,7 @@ export const ContextProvider = ({ children }) => {
 	const getAddress = async () => {
 		if (userSesion[0]) {
 			const { id } = userSesion[0]
-			await axios.get(`http://18.207.215.219:8080/address/client/${id}`)
+			await axios.get(`https://18.207.215.219:8080/address/client/${id}`)
 				.then(({ data }) => {
 					setAddress(data.data)
 					console.log(data.data)
@@ -202,7 +202,7 @@ export const ContextProvider = ({ children }) => {
 	//REQUEST FOR THE PAYMENTS
 	const addPayment = async (payment) => {
 		const { cardNumber, dateExpiry, cardHolder, cardIssuer, cvv, clientId } = payment;
-		await axios.post("http://18.207.215.219:8080/payment", { cardNumber, dateExpiry, cardHolder, cardIssuer, cvv, clientId })
+		await axios.post("https://18.207.215.219:8080/payment", { cardNumber, dateExpiry, cardHolder, cardIssuer, cvv, clientId })
 			.then(function (response) {
 				getPayment();
 			}).catch(function (error) {
@@ -213,7 +213,7 @@ export const ContextProvider = ({ children }) => {
 
 	const putPayment = async (payment) => {
 		const { id, cardNumber, dateExpiry, cardHolder, cardIssuer, cvv, clientId } = payment
-		await axios.put(`http://18.207.215.219:8080/payment/${id}`, { id, cardNumber, dateExpiry, cardHolder, cardIssuer, cvv, clientId })
+		await axios.put(`https://18.207.215.219:8080/payment/${id}`, { id, cardNumber, dateExpiry, cardHolder, cardIssuer, cvv, clientId })
 			.then(function (response) {
 				getPayment();
 			}).catch(function (error) {
@@ -222,7 +222,7 @@ export const ContextProvider = ({ children }) => {
 	}
 
 	const delatePayment = async (id) => {
-		await axios.delete(`http://18.207.215.219:8080/payment/${id}`)
+		await axios.delete(`https://18.207.215.219:8080/payment/${id}`)
 			.then(function (response) {
 				getPayment();
 			}).catch(function (error) {
@@ -233,7 +233,7 @@ export const ContextProvider = ({ children }) => {
 	//REQUEST FOR THE DIRECCIONS
 	const addAddress = async (address) => {
 		const { state, city, street, houseNumber, zipCode, clientId } = address;
-		await axios.post("http://18.207.215.219:8080/address", { state, city, street, houseNumber, zipCode, clientId })
+		await axios.post("https://18.207.215.219:8080/address", { state, city, street, houseNumber, zipCode, clientId })
 			.then(function (response) {
 				setAddress(response.data)
 				getAddress()
@@ -244,7 +244,7 @@ export const ContextProvider = ({ children }) => {
 	}
 	const putAddress = async (address) => {
 		const { id, state, city, street, houseNumber, zipCode, clientId } = address
-		await axios.put(`http://18.207.215.219:8080/address/${id}`, { state, city, street, houseNumber, zipCode, clientId })
+		await axios.put(`https://18.207.215.219:8080/address/${id}`, { state, city, street, houseNumber, zipCode, clientId })
 			.then(function (response) {
 				getAddress();
 			}).catch(function (error) {
@@ -252,7 +252,7 @@ export const ContextProvider = ({ children }) => {
 			})
 	}
 	const delateAddress = async (id) => {
-		await axios.delete(`http://18.207.215.219:8080/address/${id}`)
+		await axios.delete(`https://18.207.215.219:8080/address/${id}`)
 			.then(function (response) {
 				getAddress()
 			}).catch(function (error) {

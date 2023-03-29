@@ -32,7 +32,7 @@ const Product = () => {
     console.log(...formData)
     const k = [...formData]
     console.log(k)
-    axios.post('http://18.207.215.219:8080/file', formData
+    axios.post('https://18.207.215.219:8080/file', formData
     ).then(function (response) {
       console.log(response)
       setProduct({...product, cakePicture: response.data.data});

@@ -7,18 +7,26 @@ import axios from "axios";
 
 const Home = ({search}) => {
     const [item, setItems] = useState([]);
+    const [productsFilters, setProductsFilters] = useState([]);
     const getProducts = async () => {
         await axios
-            .get("http://18.207.215.219:8080/product/list")
+            .get("https://18.207.215.219:8080/product/list")
             .then(({ data }) => setItems(data.data));
 
     };
+
     useEffect(() => {
         getProducts();
     }, []);
     console.log(item)
-    const uniqueSections = [...new Set(item.map(data => data.type))];
+
+    const filtrado = item.filter((objeto) => objeto.name.toLowerCase().includes(search.toLowerCase()));
+    console.log('filtrado',filtrado)
+
+    const uniqueSections = [...new Set(filtrado.map(data => data.type))];
     console.log(uniqueSections)
+
+
   return (
     <section className="section">
       <div className="bg-blue-amazon w-full">
@@ -30,7 +38,7 @@ const Home = ({search}) => {
                 {type}
             </h3>
             <div className="flex px-9 pb-12 lg:pb-20 gap-8 flex-wrap justify-center lg:gap-10">
-                {item.map((product) => (
+                {filtrado.map((product) => (
                     type === product.type &&
                         <Card
                             data={product}
