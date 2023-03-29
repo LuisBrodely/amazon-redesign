@@ -9,7 +9,7 @@ const Home = ({search}) => {
     const [item, setItems] = useState([]);
     const getProducts = async () => {
         await axios
-            .get("http://http://18.207.215.219:8080/product/list")
+            .get("http://18.207.215.219:8080/product/list")
             .then(({ data }) => setItems(data.data));
 
     };
@@ -35,7 +35,7 @@ const Home = ({search}) => {
                         <Card
                             data={product}
                             key={product.id}
-                            title={product.title}
+                            title={product.name}
                             price={product.price}
                             img={product.cakePicture}
                         />

@@ -2,10 +2,12 @@ import React, {useContext} from "react";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import axios from "axios";
+import {Link, useNavigate} from 'react-router-dom'
 import {Context} from "../Context.jsx";
 
 const Product = () => {
   const {addItem} = useContext(Context)
+  const navigate = useNavigate()
   const [product, setProduct] = useState({
     name: "",
     price: 0,
@@ -30,7 +32,7 @@ const Product = () => {
     console.log(...formData)
     const k = [...formData]
     console.log(k)
-    axios.post('http://localhost:8080/file', formData
+    axios.post('http://18.207.215.219:8080/file', formData
     ).then(function (response) {
       console.log(response)
       setProduct({...product, cakePicture: response.data.data});
@@ -43,6 +45,7 @@ const Product = () => {
     e.preventDefault();
     console.log(product);
     addItem(product);
+    navigate("/index")
   };
 
   return (
@@ -219,7 +222,7 @@ const Product = () => {
             type="button"
             className="text-sm font-semibold leading-6 text-gray-900"
           >
-            Cancelar
+            <Link to='/index/'>Cancelar</Link>
           </button>
           <button
             type="submit"

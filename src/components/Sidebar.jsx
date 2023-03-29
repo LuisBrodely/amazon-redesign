@@ -24,7 +24,7 @@ const Sidebar = ({ showMenu, setShowMenu }) => {
             </div>
 
             <div className="nav__items">
-              <Link to='/index/' className="nav__link active">
+              <Link to='/index/' className="nav__link">
                 <i className="bx bx-home nav__icon"></i>
                 <span className="nav__name">Inicio</span>
               </Link>
