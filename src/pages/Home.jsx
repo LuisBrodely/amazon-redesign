@@ -9,7 +9,7 @@ const Home = ({search}) => {
     const [item, setItems] = useState([]);
     const getProducts = async () => {
         await axios
-            .get("http://localhost:8080/product/list")
+            .get("http://http://18.207.215.219:8080/product/list")
             .then(({ data }) => setItems(data.data));
 
     };
