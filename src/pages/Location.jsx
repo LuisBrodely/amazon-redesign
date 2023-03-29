@@ -1,10 +1,16 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
-import {Context} from "../Context.jsx";
+import { Context } from "../Context.jsx";
 
 const Location = () => {
-  const {addAddress, userSesion} = useContext(Context)
-  const {id ,name, lastName, phone, email} = userSesion[0]
+  const { addAddress, userSesion } = useContext(Context)
+
+  let id = () => {
+    if (userSesion[0]) {
+      return { id } = userSesion[0]
+    }
+  }
+
   const [adress, setAdress] = useState({
     state: "",
     city: '',
@@ -15,10 +21,10 @@ const Location = () => {
   });
 
   const handleChange = (e) => {
-		const { name, value } = e.target;
+    const { name, value } = e.target;
     setAdress({ ...adress, [name]: value });
     console.log(name, value)
-	}
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -119,7 +125,7 @@ const Location = () => {
             </div>
           </div>
 
-					<div>
+          <div>
             <label
               htmlFor="zipCode"
               className="block text-sm font-semibold leading-6 text-gray-900"
@@ -153,7 +159,7 @@ const Location = () => {
               />
             </div>
           </div>
-          
+
         </div>
         <div className="mt-10">
           <button
