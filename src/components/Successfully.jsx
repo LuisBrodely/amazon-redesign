@@ -7,7 +7,7 @@ export default function Successfully() {
   const [show, setShow] = useState(true)
 
   return (
-    <>
+    
       <div
         aria-live="assertive"
         className="pointer-events-none fixed inset-0 flex px-4 sm:items-start p-20"
@@ -51,6 +51,6 @@ export default function Successfully() {
           </Transition>
         </div>
       </div>
-    </>
+    
   )
 }
