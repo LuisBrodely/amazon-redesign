@@ -1,35 +1,41 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
-import {Context} from "../Context.jsx";
+import { Context } from "../Context.jsx";
 
 const Payment = () => {
-    const {addPayment, userSesion} = useContext(Context)
-    const {id ,name, lastName, phone, email} = userSesion[0]
-	const [card, setCard] = useState({
-        cardIssuer: "Steve Jobs",
-        cardNumber: '0000000000000000',
-        dateExpiry: "03/25",
-        cardHolder: 'Citibanamex',
-		cvv: 0,
-        clientId: id
+  const { addPayment, userSesion } = useContext(Context)
+  
+  let id = () => {
+    if (userSesion[0]) {
+      return { id } = userSesion[0]
+    }
+  }
+
+  const [card, setCard] = useState({
+    cardIssuer: "Steve Jobs",
+    cardNumber: '0000000000000000',
+    dateExpiry: "03/25",
+    cardHolder: 'Citibanamex',
+    cvv: 0,
+    clientId: id
   });
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setCard({ ...card, [name]: value });
-	}
+  }
 
-	const addSpaces = (numero) => {
-		let cadena = numero.toString();
-		let cadenaConEspacios = '';
-		for (let i = 0; i < cadena.length; i += 4) {
-			// Aqui añadimos los cuatro dígitos y un espacio a la nueva cadena
-			cadenaConEspacios += cadena.substr(i, 4) + ' ';
-		}
-		return cadenaConEspacios.trim();
-	}
+  const addSpaces = (numero) => {
+    let cadena = numero.toString();
+    let cadenaConEspacios = '';
+    for (let i = 0; i < cadena.length; i += 4) {
+      // Aqui añadimos los cuatro dígitos y un espacio a la nueva cadena
+      cadenaConEspacios += cadena.substr(i, 4) + ' ';
+    }
+    return cadenaConEspacios.trim();
+  }
 
-	const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log(card);
     addPayment(card);
@@ -77,7 +83,7 @@ const Payment = () => {
         </div>
       </div>
 
-			<div className="mx-auto max-w-2xl text-center mt-10">
+      <div className="mx-auto max-w-2xl text-center mt-10">
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           Metodo de Pago
         </h2>
@@ -86,7 +92,7 @@ const Payment = () => {
         </p>
       </div>
 
-			<form
+      <form
         onSubmit={handleSubmit}
         className="mx-auto mt-16 max-w-xl sm:mt-20"
       >
@@ -101,9 +107,9 @@ const Payment = () => {
             </label>
             <div className="mt-2.5">
               <input
-								onChange={handleChange}
+                onChange={handleChange}
                 type="text"
-								placeholder={card.cardIssuer}
+                placeholder={card.cardIssuer}
                 name="cardIssuer"
                 id="cardIssuer	"
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
@@ -111,7 +117,7 @@ const Payment = () => {
             </div>
           </div>
 
-					<div className="sm:col-span-2">
+          <div className="sm:col-span-2">
             <label
               htmlFor="cardNumber"
               className="block text-sm font-semibold leading-6 text-gray-900"
@@ -120,10 +126,10 @@ const Payment = () => {
             </label>
             <div className="mt-2.5">
               <input
-								onChange={handleChange}
-								maxLength={16}
+                onChange={handleChange}
+                maxLength={16}
                 type="text"
-								placeholder={addSpaces(card.cardNumber)}
+                placeholder={addSpaces(card.cardNumber)}
                 name="cardNumber"
                 id="cardNumber"
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
@@ -131,7 +137,7 @@ const Payment = () => {
             </div>
           </div>
 
-					<div>
+          <div>
             <label
               htmlFor="cardHolder"
               className="block text-sm font-semibold leading-6 text-gray-900"
@@ -140,11 +146,11 @@ const Payment = () => {
             </label>
             <div className="mt-2.5">
               <input
-								onChange={handleChange}
+                onChange={handleChange}
                 type="text"
                 name="cardHolder"
                 id="cardHolder"
-								placeholder={card.cardHolder}
+                placeholder={card.cardHolder}
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
               />
             </div>
@@ -158,18 +164,18 @@ const Payment = () => {
             </label>
             <div className="mt-2.5">
               <input
-								onChange={handleChange}
+                onChange={handleChange}
                 type="text"
                 name="dateExpiry"
-								maxLength={5}
-								placeholder={card.dateExpiry}
+                maxLength={5}
+                placeholder={card.dateExpiry}
                 id="dateExpiry"
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
               />
             </div>
           </div>
 
-					<div>
+          <div>
             <label
               htmlFor="cvv"
               className="block text-sm font-semibold leading-6 text-gray-900"
@@ -178,17 +184,17 @@ const Payment = () => {
             </label>
             <div className="mt-2.5">
               <input
-								onChange={handleChange}
+                onChange={handleChange}
                 type="password"
                 name="cvv"
-								maxLength={3}
-								placeholder='000'
+                maxLength={3}
+                placeholder='000'
                 id="cvv"
                 className="block w-full rounded-md border-0 py-2 px-3.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-amazon sm:text-sm sm:leading-6"
               />
             </div>
           </div>
-          
+
         </div>
         <div className="mt-10">
           <button
